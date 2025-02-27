@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Memorization App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Text Memorization App</h1>
+        
+        <div class="textarea-container">
+            <textarea id="textInput" placeholder="Paste any English text here that you want to memorize..."></textarea>
+        </div>
+        
+        <div class="controls">
+            <button id="hideTextBtn">Hide Text</button>
+            <button id="startRecordingBtn"><span class="mic-icon">🎤</span> Start Recording</button>
+            <div class="sequence-toggle">
+                <label>
+                    <input type="checkbox" id="sequenceToggle" checked>
+                    Words must be in sequence
+                </label>
+            </div>
+            <button id="resetBtn">Reset</button>
+        </div>
+        
+        <div id="hiddenTextDisplay" class="hidden-text-display"></div>
+        
+        <div class="status">
+            <p id="statusMessage">Enter your text and press "Hide Text" to begin.</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
