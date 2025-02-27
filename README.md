@@ -15,7 +15,7 @@ A web application that helps users memorize text by speaking it aloud. The app u
 
 ## How to Use
 
-1. Open `index.html` in a compatible web browser (Chrome or Edge recommended)
+1. Open `index.html` in a compatible web browser (Chrome recommended)
 2. Paste or type the text you want to memorize into the textbox
 3. Click "Hide Text" to begin
 4. Click the microphone button and start reciting the text
@@ -25,7 +25,7 @@ A web application that helps users memorize text by speaking it aloud. The app u
 
 ## Requirements
 
-- Modern web browser with support for the Web Speech API (Chrome, Edge recommended)
+- Modern web browser with support for the Web Speech API (Chrome recommended)
 - Microphone access
 - Internet connection (for speech recognition)
 
