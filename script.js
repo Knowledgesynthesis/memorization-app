@@ -259,49 +259,23 @@ document.addEventListener('DOMContentLoaded', () => {
             startRecordingBtn.classList.add('recording');
             updateStatus('Listening... Speak the text clearly.');
             
-            // Request microphone permission explicitly
-            logDebug('Requesting microphone permission');
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(stream => {
-                    logDebug('Microphone permission granted');
-                    
-                    // Immediately stop the stream as we just needed the permission
-                    stream.getTracks().forEach(track => track.stop());
-                    
-                    // Now start speech recognition with permission granted
-                    try {
-                        // Small delay to ensure the mic is ready
-                        setTimeout(() => {
-                            try {
-                                logDebug('Starting speech recognition after microphone permission');
-                                recognition.start();
-                            } catch (e) {
-                                if (e.name === 'InvalidStateError') {
-                                    // Recognition is already started, which is fine
-                                    logDebug('Recognition was already running');
-                                } else {
-                                    logDebug(`Error starting recognition: ${e.message}`);
-                                    throw e; // Rethrow other errors
-                                }
-                            }
-                        }, 100);
-                    } catch (e) {
-                        logDebug(`Error during recognition start: ${e.message}`);
-                        if (e.name === 'InvalidStateError') {
-                            // Recognition is already started, which is fine
-                            logDebug('Recognition was already running (InvalidStateError caught)');
-                        } else {
-                            throw e; // Rethrow other errors
-                        }
-                    }
-                })
-                .catch(err => {
-                    logDebug(`Microphone permission error: ${err.name} - ${err.message}`);
-                    updateStatus(`Microphone access denied. Please allow microphone access in your browser settings.`);
+            // Start speech recognition - the browser will automatically request microphone permission
+            // when needed, no need to explicitly request it beforehand
+            try {
+                logDebug('Starting speech recognition');
+                recognition.start();
+            } catch (e) {
+                if (e.name === 'InvalidStateError') {
+                    // Recognition is already started, which is fine
+                    logDebug('Recognition was already running');
+                } else {
+                    logDebug(`Error starting recognition: ${e.message}`);
+                    updateStatus(`Error starting speech recognition: ${e.message}. Please try again.`);
                     isRecording = false;
                     startRecordingBtn.innerHTML = '<span class="mic-icon">🎤</span> Start Recording';
                     startRecordingBtn.classList.remove('recording');
-                });
+                }
+            }
         } catch (error) {
             logDebug(`General error starting recognition: ${error.message}`);
             updateStatus(`Error starting speech recognition: ${error.message}. Please try again.`);
